@@ -1,0 +1,15 @@
+.section-container {
+    display: flex;
+}
+.section-container__left, .section-container__right {
+    width: 50%;
+}
+
+.section-container__left {
+    background-color:rgb(128, 210, 238);
+}
+
+.section-container__right {
+    background-color: rgb(227, 241, 197);
+}
+

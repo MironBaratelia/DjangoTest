@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'chat/css/section.css' %}">
+{% endblock %}
+
+{% block header_container_class %}container-fluid{% endblock %}
+
+{% block main %}
+    <div class="section-container">
+        <div class="section-container__left">
+
+            {% for conversation in conversations %}
+                <a href="?conversation={{ conversation.id }}">{{ conversation }}</a><br>
+            {% endfor %}
+
+            {% if not user.is_anonymous %}
+            <form method="post">
+                {% csrf_token %}
+                <input typy="hidden" name="form" value="conversation" style="display: none;">
+                {{ conversation_form }}
+                <button type="submit">Добавить</button>
+            </form>
+            {% endif %}
+
+        </div>
+        <div class="section-container__right">
+            {% if conversation_id %}
+
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+
+                {% if not user.is_anonymous %}
+                <form method="post">
+                    {% csrf_token %}
+                    <input typy="hidden" name="form" value="message" style="display: none;">
+                    <input typy="text" name="message" aria-label="message" required>
+                    <button type="submit">Добавить</button>
+                </form>
+                {% endif %}
+
+            {% endif %}
+
+        </div>
+    </div>
+
+
+{% endblock %}

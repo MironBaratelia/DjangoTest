@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main %}
+    <div class="container-xl">
+        {% if user.avatar %}
+            <img src="{{ user.avatar.url }}">
+        {% endif %}
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Сохранить изменения</button>
+        </form>
+    </div>
+{% endblock %}
